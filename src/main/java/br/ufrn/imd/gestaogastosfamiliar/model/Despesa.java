@@ -1,6 +1,5 @@
-package br.ufrn.imd.gestaogastosfamiliar.model.despesa;
+package br.ufrn.imd.gestaogastosfamiliar.model;
 
-import br.ufrn.imd.gestaogastosfamiliar.model.usuario.Usuario;
 import jakarta.persistence.*;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -8,12 +7,14 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.UUID;
 
-public class Despesa implements Serializable {
+@Entity
+@Table(name = "despesa")
+public class Despesa extends IDespesaImpl implements Serializable {
 
     @Id
     @GeneratedValue(generator = "uuid2")
     @GenericGenerator(name = "uuid2", strategy = "uuid2")
-    @Column(name = "id", updatable = false, nullable = false)
+    @Column(name = "id", nullable = false)
     private UUID id;
 
     @Column(name = "descricao", nullable = false)
@@ -22,23 +23,17 @@ public class Despesa implements Serializable {
     @Column(name = "valor", nullable = false)
     private Double valor;
 
-    @Column(name = "vencimento", nullable = false)
-    private Date vencimento;
+    @Column(name = "data_vencimento", nullable = false)
+    private Date dataVencimento;
 
     @Column(name = "visibilidade", nullable = false)
-    @Enumerated(EnumType.STRING)
     private Visibilidade visibilidade;
 
-    @ManyToOne
-    @JoinColumn(name = "id_usuario", nullable = false)
-    private Usuario usuario;
-
-    public Despesa(String descricao, Double valor, Date vencimento, Visibilidade visibilidade, Usuario usuario) {
+    public Despesa(String descricao, Double valor, Date dataVencimento, Visibilidade visibilidade) {
         this.descricao = descricao;
         this.valor = valor;
-        this.vencimento = vencimento;
+        this.dataVencimento = dataVencimento;
         this.visibilidade = visibilidade;
-        this.usuario = usuario;
     }
 
     public Despesa(){
@@ -68,12 +63,12 @@ public class Despesa implements Serializable {
         this.valor = valor;
     }
 
-    public Date getVencimento() {
-        return vencimento;
+    public Date getDataVencimento() {
+        return dataVencimento;
     }
 
-    public void setVencimento(Date vencimento) {
-        this.vencimento = vencimento;
+    public void setDataVencimento(Date dataVencimento) {
+        this.dataVencimento = dataVencimento;
     }
 
     public Visibilidade getVisibilidade() {
@@ -82,13 +77,5 @@ public class Despesa implements Serializable {
 
     public void setVisibilidade(Visibilidade visibilidade) {
         this.visibilidade = visibilidade;
-    }
-
-    public Usuario getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
     }
 }

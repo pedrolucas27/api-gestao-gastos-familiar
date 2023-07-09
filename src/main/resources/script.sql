@@ -3,10 +3,10 @@ create table familia(
                         nome varchar(30)
 );
 
-create table usuario(
+create table membro(
                         id uuid not null primary key,
                         nome varchar(50) not null,
-                        email varchar(30) not null,
+                        email varchar(30) not null unique,
                         data_nascimento date,
                         senha varchar(25) not null,
                         perfil varchar(20) not null,
@@ -18,8 +18,8 @@ create table despesa(
                         id uuid not null primary key,
                         descricao varchar(50) not null,
                         valor decimal not null,
-                        vencimento date not null,
+                        data_vencimento date not null,
                         visibilidade varchar(20) not null,
-                        id_usuario uuid not null,
-                        foreign key (id_usuario) references usuario(id)
+                        id_membro uuid not null,
+                        foreign key (id_membro) references membro(id)
 );

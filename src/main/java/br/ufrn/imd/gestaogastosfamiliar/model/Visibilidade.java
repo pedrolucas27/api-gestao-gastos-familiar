@@ -1,6 +1,7 @@
-package br.ufrn.imd.gestaogastosfamiliar.model.despesa;
+package br.ufrn.imd.gestaogastosfamiliar.model;
 
 public enum Visibilidade {
+
     PUBLICO("Público"),
     PRIVADO("Privado");
 
