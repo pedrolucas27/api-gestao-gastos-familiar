@@ -29,6 +29,10 @@ public class Despesa extends IDespesaImpl implements Serializable {
     @Column(name = "visibilidade", nullable = false)
     private Visibilidade visibilidade;
 
+    @ManyToOne
+    @JoinColumn(name = "id_membro", nullable = false)
+    private Membro membro;
+
     public Despesa(String descricao, Double valor, Date dataVencimento, Visibilidade visibilidade) {
         this.descricao = descricao;
         this.valor = valor;

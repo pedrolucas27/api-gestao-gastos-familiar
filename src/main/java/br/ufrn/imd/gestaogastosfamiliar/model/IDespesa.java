@@ -7,7 +7,6 @@ import java.util.Date;
 /**
  * Interface para operações relacionadas a despesas.
  */
-
 @Service
 public interface IDespesa {
 

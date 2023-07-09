@@ -3,7 +3,7 @@ package br.ufrn.imd.gestaogastosfamiliar.model;
 import java.util.Date;
 
 /**
- * Implementação da interface {IDespesa} que representa a edição de despesas.
+ * Implementação da interface Despesa que representa a edição de despesas.
  */
 public class IDespesaImpl implements IDespesa {
 

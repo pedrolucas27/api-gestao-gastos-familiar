@@ -9,37 +9,41 @@ import java.util.List;
 import java.util.UUID;
 
 /**
- * Classe abstrata que representa um membro genérico.
+ * Classe que representa um membro genérico.
  */
 @Entity
 @Table(name = "membro")
-public abstract class Membro implements Serializable {
+public class Membro implements Serializable {
 
     @Id
     @GeneratedValue(generator = "uuid2")
     @GenericGenerator(name = "uuid2", strategy = "uuid2")
     @Column(name = "id", nullable = false)
-    protected UUID id;
+    private UUID id;
 
     @Column(name = "nome", nullable = false)
-    protected String nome;
+    private String nome;
 
     @Column(name = "email", nullable = false)
-    protected String email;
+    private String email;
 
     @Column(name = "data_nascimento", nullable = false)
-    protected Date dataNascimento;
+    private Date dataNascimento;
 
     @Column(name = "senha", nullable = false)
-    protected String senha;
+    private String senha;
 
     @Column(name = "perfil", nullable = false)
     @Enumerated(EnumType.STRING)
-    protected Perfil perfil;
+    private Perfil perfil;
 
     @OneToMany
     @JoinColumn(name = "id_membro")
-    protected List<Despesa> despesas;
+    private List<Despesa> despesas;
+
+    @ManyToOne
+    @JoinColumn(name = "id_familia", nullable = false)
+    private Familia familia;
 
     /**
      * Construtor da classe Membro.
@@ -63,32 +67,6 @@ public abstract class Membro implements Serializable {
      */
     public Membro() {
     }
-
-    /**
-     * Adiciona uma despesa ao membro.
-     *
-     * @param despesa A despesa a ser adicionada.
-     * @return true se a despesa foi adicionada com sucesso, false caso contrário.
-     */
-    abstract boolean adicionarDespesa(Despesa despesa);
-
-    /**
-     * Edita uma despesa existente do membro.
-     *
-     * @param despesa A despesa a ser editada.
-     * @return true se a despesa foi editada com sucesso, false caso contrário.
-     * @throws IllegalArgumentException Se a despesa ou o ID da despesa forem nulos.
-     */
-    abstract boolean editarDespesa(Despesa despesa) throws IllegalArgumentException;
-
-    /**
-     * Remove uma despesa do membro pelo seu ID.
-     *
-     * @param id O ID da despesa a ser removida.
-     * @return true se a despesa foi removida com sucesso, false caso contrário.
-     * @throws IllegalArgumentException Se o ID for nulo.
-     */
-    abstract boolean removerDespesa(UUID id) throws IllegalArgumentException;
 
     // Getters e setters
 
@@ -148,7 +126,17 @@ public abstract class Membro implements Serializable {
         return perfil;
     }
 
+    public Familia getFamilia() {
+        return familia;
+    }
+
+    public void setFamilia(Familia familia) {
+        this.familia = familia;
+    }
+
     public void setPerfil(Perfil perfil) {
         this.perfil = perfil;
     }
+
+
 }
