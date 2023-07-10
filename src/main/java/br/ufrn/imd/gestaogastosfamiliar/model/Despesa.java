@@ -82,4 +82,8 @@ public class Despesa extends IDespesaImpl implements Serializable {
     public void setVisibilidade(Visibilidade visibilidade) {
         this.visibilidade = visibilidade;
     }
+
+    public Membro getMembro() { return membro; }
+
+    public void setMembro(Membro membro) { this.membro = membro; }
 }

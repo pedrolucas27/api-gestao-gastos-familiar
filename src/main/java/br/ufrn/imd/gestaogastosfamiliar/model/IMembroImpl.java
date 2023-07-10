@@ -1,6 +1,8 @@
 package br.ufrn.imd.gestaogastosfamiliar.model;
 
 import br.ufrn.imd.gestaogastosfamiliar.repository.DespesaRepository;
+import br.ufrn.imd.gestaogastosfamiliar.repository.MembroRepository;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -15,14 +17,23 @@ import java.util.UUID;
 public class IMembroImpl implements IMembro {
 
     private final DespesaRepository despesaRepository;
+    private final MembroRepository membroRepository;
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public boolean adicionarDespesa(Despesa despesa) {
+    public boolean adicionarDespesa(Despesa despesa, UUID idMembro) {
         validarCamposDespesa(despesa);
-        despesaRepository.save(despesa);
+
+        Membro membro = membroRepository.findById(idMembro).orElseThrow(() -> new EntityNotFoundException("Não existe membro com esse ID"));
+
+        despesa.setMembro(membro);
+        despesa = despesaRepository.save(despesa);
+
+        membro.getDespesas().add(despesa);
+        membroRepository.save(membro);
+
         return true;
     }
 

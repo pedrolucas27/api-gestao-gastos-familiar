@@ -11,9 +11,10 @@ public interface IMembro {
      * Adiciona uma despesa ao membro.
      *
      * @param despesa A despesa a ser adicionada.
+     * @param idMembro O ID do membro ao qual a despesa será associada.
      * @return true se a despesa foi adicionada com sucesso, false caso contrário.
      */
-    boolean adicionarDespesa(Despesa despesa);
+    boolean adicionarDespesa(Despesa despesa, UUID idMembro);
 
     /**
      * Edita uma despesa existente do membro.
