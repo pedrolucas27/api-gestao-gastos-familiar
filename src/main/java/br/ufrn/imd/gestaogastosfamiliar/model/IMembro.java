@@ -17,15 +17,6 @@ public interface IMembro {
     boolean adicionarDespesa(Despesa despesa, UUID idMembro);
 
     /**
-     * Edita uma despesa existente do membro.
-     *
-     * @param despesa A despesa a ser editada.
-     * @return true se a despesa foi editada com sucesso, false caso contrário.
-     * @throws IllegalArgumentException Se a despesa ou o ID da despesa forem nulos.
-     */
-    boolean editarDespesa(Despesa despesa) throws IllegalArgumentException;
-
-    /**
      * Remove uma despesa do membro pelo seu ID.
      *
      * @param id O ID da despesa a ser removida.

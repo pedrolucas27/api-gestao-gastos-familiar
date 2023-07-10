@@ -1,5 +1,6 @@
 package br.ufrn.imd.gestaogastosfamiliar.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -37,12 +38,12 @@ public class Membro implements Serializable {
     @Enumerated(EnumType.STRING)
     private Perfil perfil;
 
-    @OneToMany
-    @JoinColumn(name = "id_membro")
+    @OneToMany(mappedBy = "membro", cascade = CascadeType.ALL)
     private List<Despesa> despesas;
 
     @ManyToOne
-    @JoinColumn(name = "id_familia", nullable = false)
+    @JoinColumn(name = "id_familia")
+    @JsonIgnore
     private Familia familia;
 
     /**
@@ -116,10 +117,6 @@ public class Membro implements Serializable {
 
     public void setDespesas(List<Despesa> despesas) {
         this.despesas = despesas;
-    }
-
-    public void addDespesa(Despesa despesa) {
-        this.despesas.add(despesa);
     }
 
     public Perfil getPerfil() {

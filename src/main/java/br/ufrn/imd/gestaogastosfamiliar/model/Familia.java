@@ -20,8 +20,7 @@ public class Familia implements Serializable {
     @Column(name = "nome", nullable = false)
     private String sobrenome;
 
-    @OneToMany
-    @JoinColumn(name = "id_familia")
+    @OneToMany(mappedBy = "familia", cascade = CascadeType.ALL)
     private List<Membro> membros;
 
 

@@ -5,12 +5,13 @@ import jakarta.persistence.EntityNotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Objects;
+import java.util.UUID;
 
 /**
- * Implementação da interface Despesa que representa a edição de despesas.
+ * Implementação da interface IDespesa que permite a edição e listagem de despesas.
  */
-
 @Service
 @AllArgsConstructor
 public class IDespesaImpl implements IDespesa {
@@ -46,4 +47,24 @@ public class IDespesaImpl implements IDespesa {
         despesaRepository.save(despesaDb);
         return true;
     }
+
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public List<Despesa> listarPorMembro(UUID idMembro) {
+        if (Objects.isNull(idMembro)) throw new IllegalArgumentException("Id nulo, despesa não pode ser removida!");
+        return despesaRepository.listarPorMembro(idMembro);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public List<Despesa> listarPorFamilia(UUID idFamilia) {
+        if (Objects.isNull(idFamilia)) throw new IllegalArgumentException("Id nulo, despesa não pode ser removida!");
+        return despesaRepository.listarPorMembro(idFamilia);
+    }
 }
+

@@ -41,17 +41,6 @@ public class IMembroImpl implements IMembro {
      * {@inheritDoc}
      */
     @Override
-    public boolean editarDespesa(Despesa despesa) throws IllegalArgumentException {
-        validarCamposDespesa(despesa);
-        if (Objects.isNull(despesa.getId())) throw new IllegalArgumentException("Não pode ser editada, pois o ID informado está nulo.");
-        despesaRepository.save(despesa);
-        return true;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     public boolean removerDespesa(UUID id) throws IllegalArgumentException {
         if (Objects.isNull(id)) throw new IllegalArgumentException("Id nulo, despesa não pode ser removida!");
         despesaRepository.deleteById(id);

@@ -1,5 +1,6 @@
 package br.ufrn.imd.gestaogastosfamiliar.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -27,10 +28,12 @@ public class Despesa implements Serializable {
     private Date dataVencimento;
 
     @Column(name = "visibilidade", nullable = false)
+    @Enumerated(EnumType.STRING)
     private Visibilidade visibilidade;
 
     @ManyToOne
-    @JoinColumn(name = "id_membro", nullable = false)
+    @JoinColumn(name = "id_membro")
+    @JsonIgnore
     private Membro membro;
 
     public Despesa(String descricao, Double valor, Date dataVencimento, Visibilidade visibilidade) {
@@ -40,7 +43,7 @@ public class Despesa implements Serializable {
         this.visibilidade = visibilidade;
     }
 
-    public Despesa(){
+    public Despesa() {
     }
 
     public UUID getId() {

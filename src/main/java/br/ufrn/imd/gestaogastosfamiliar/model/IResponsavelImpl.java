@@ -16,7 +16,7 @@ import java.util.UUID;
  */
 @Service
 @AllArgsConstructor
-public class IResponsavelImpl extends Membro implements IResponsavel {
+public class IResponsavelImpl implements IResponsavel {
 
     private final FamiliaRepository familiaRepository;
     private final MembroRepository membroRepository;
@@ -68,9 +68,7 @@ public class IResponsavelImpl extends Membro implements IResponsavel {
 
     @Override
     public List<Membro> listarMembros(UUID idFamilia) {
-        return familiaRepository.findById(idFamilia)
-                .orElseThrow(() -> new EntityNotFoundException("Não foi possível encontrar a familía."))
-                .getMembros();
+        return membroRepository.findByFamiliaId(idFamilia);
     }
 
     /**

@@ -37,13 +37,17 @@ public class ResponsavelController {
         return new ResponseEntity<>(resultado, resultado ? HttpStatus.OK : HttpStatus.BAD_REQUEST);
     }
 
-
     @GetMapping(value = "/listar-membros/{idFamilia}")
     public ResponseEntity<List<Membro>> listarMembrosFamilia(@PathVariable UUID idFamilia){
         List<Membro> membros = service.listarMembros(idFamilia);
         return new ResponseEntity<>(membros, HttpStatus.OK );
     }
 
+    @DeleteMapping(value = "/remover-membro/{idMembro}")
+    public ResponseEntity<Boolean> deletarMembro(@PathVariable UUID idMembro) {
+        boolean resultado = service.removerMembro(idMembro);
+        return new ResponseEntity<>(resultado, resultado ? HttpStatus.OK : HttpStatus.BAD_REQUEST);
+    }
 
     private Membro getMembro(MembroDto dto) {
         Membro responsavel = new Membro();
