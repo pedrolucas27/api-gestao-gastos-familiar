@@ -9,7 +9,7 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "despesa")
-public class Despesa extends IDespesaImpl implements Serializable {
+public class Despesa implements Serializable {
 
     @Id
     @GeneratedValue(generator = "uuid2")
